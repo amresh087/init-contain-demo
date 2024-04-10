@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: my-application
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: templates-fetcher
+        image: appropriate/curl  # Use an image with curl installed
+        command: ["sh", "-c", "curl -o /templates/templates.zip https://github.com/amresh087/my-templates-repo/templates.zip && unzip /templates/templates.zip -d /templates"]
+        volumeMounts:
+        - name: templates-volume
+          mountPath: /templates
+      containers:
+      - name: my-container
+        image: centos
+        volumeMounts:
+        - name: templates-volume
+          mountPath: /app/templates
+      volumes:
+      - name: templates-volume
+        emptyDir: {}
+
+

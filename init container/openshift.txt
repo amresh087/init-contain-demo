@@ -1,0 +1,21 @@
+ 
+
+Below are the URLs for Openshift in all environment in US-EAST-1:
+
+Connect to Ash proxy (http://ash.marketaxess.com/) before connecting to Openshift cluster.
+
+Dev: https://console-openshift-console.apps.devel-posttrade.2yi2.p1.openshiftapps.com
+
+QA: https://console-openshift-console.apps.qa-pt.s8uh.p1.openshiftapps.com
+
+LTS: https://console-openshift-console.apps.lts-pt.ze1q.p1.openshiftapps.com
+
+STG: https://console-openshift-console.apps.stg-pt.4e46.p1.openshiftapps.com 
+
+PRD: https://console-openshift-console.apps.prod-pt.8lpr.p1.openshiftapps.com
+
+ 
+
+Below are the URLs for Openshift in all environment in US-EAST-2:
+
+PRD: https://console-openshift-console.apps.prod-use2-pt.o4l2.p1.openshiftapps.com/dashboards

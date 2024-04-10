@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-clone-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-clone-app
+  template:
+    metadata:
+      labels:
+        app: git-clone-app
+    spec:
+      initContainers:
+        - name: git-clone-init
+          image: alpine/git
+          env:
+            - name: GIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: git-credentials
+                  key: username
+            - name: GIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: git-credentials
+                  key: password
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              
+              git clone --depth 1 --filter=blob:none --sparse https://github.com/amresh087/init-contain-demo.git /data &&
+              cd /data &&
+              git sparse-checkout init --cone &&
+              git sparse-checkout set config2
+
+          volumeMounts:
+            - name: data-volume
+              mountPath: /data
+      containers:
+        - name: spring6-demo
+          image: amresh087/spring6-demo:latest
+          ports:
+          - containerPort: 8080          
+          # Add your container configuration here
+          volumeMounts:
+            - name: data-volume
+              mountPath: /usr/share/config
+      volumes:
+        - name: data-volume
+          emptyDir: {}
+      imagePullSecrets:
+        - name: git-credentials

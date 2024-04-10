@@ -1,0 +1,9 @@
+ kubectl get pods -w
+ 
+ kubectl get pods --all-namespaces -o jsonpath="{.items[].spec.containers[].image}" -l app=mysql
+ 
+ kubectl describe pods ${mysql-68579b78bb-4l7h6}
+ 
+ kubectl delete deployment,loan-demo-app
+ 
+ 
